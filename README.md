@@ -16,4 +16,4 @@ get such schema for specific ElasticSearch version and ES plugins.
 
 ## Full documentation
 
-Available at https://ama-team.github.io/elasticsearch-schema
+Available at https://ama-team.github.io/elasticsearch-schema/

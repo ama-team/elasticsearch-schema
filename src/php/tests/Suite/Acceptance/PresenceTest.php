@@ -23,4 +23,12 @@ class PresenceTest extends Unit
     {
         Assert::assertNull(Reader::readSchema('missing'));
     }
+
+    /**
+     * @test
+     */
+    public function metaSchemaExists()
+    {
+        Assert::assertNotNull(Reader::readMetaSchema());
+    }
 }

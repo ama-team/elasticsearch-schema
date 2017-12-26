@@ -14,8 +14,19 @@ class Locator
      */
     public static function locateSchema($product)
     {
-        $segments = array(ProjectStructure::getProductSchemaRoot(), $product . '.yml');
+        $segments = [ProjectStructure::getProductSchemaRoot(), $product . '.yml'];
         $path = implode(DIRECTORY_SEPARATOR, $segments);
         return file_exists($path) ? $path : null;
+    }
+
+    /**
+     * Returns path to validation schema
+     *
+     * @return string
+     */
+    public static function locateMetaSchema()
+    {
+        $segments = [ProjectStructure::getSchemaRoot(), 'meta-schema.yml'];
+        return implode(DIRECTORY_SEPARATOR, $segments);
     }
 }
