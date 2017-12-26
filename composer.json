@@ -1,0 +1,22 @@
+{
+  "name": "ama-team/elasticsearch-schema",
+  "description": "Declarative definition of ElasticSearch configuration",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "AMA Team",
+      "email": "dev@amagroup.ru"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "AmaTeam\\ElasticSearch\\Schema\\Definition\\": "src/php/"
+    }
+  },
+  "require": {
+    "php": ">= 5.3"
+  },
+  "require-dev": {
+    "codeception/codeception": "^2.3"
+  }
+}
