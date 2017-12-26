@@ -1,8 +1,10 @@
 # IDE files
 .idea
 
-# Package managers
+# Package management
 Gemfile.lock
+composer.lock
+/vendor
 
 # Jekyll
 _site
