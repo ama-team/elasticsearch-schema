@@ -1,0 +1,10 @@
+build:
+  environment:
+    php: 5.4.41
+    elasticsearch: true
+checks:
+  php: true
+filter:
+  paths:
+    - resources
+    - src/php/src/*
