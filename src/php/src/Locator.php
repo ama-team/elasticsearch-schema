@@ -14,7 +14,7 @@ class Locator
      */
     public static function locateSchema($product)
     {
-        $segments = [ProjectStructure::getSchemaRoot(), $product . '.yml'];
+        $segments = array(ProjectStructure::getProductSchemaRoot(), $product . '.yml');
         $path = implode(DIRECTORY_SEPARATOR, $segments);
         return file_exists($path) ? $path : null;
     }

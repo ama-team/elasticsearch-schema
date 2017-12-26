@@ -10,13 +10,23 @@
   ],
   "autoload": {
     "psr-4": {
-      "AmaTeam\\ElasticSearch\\Schema\\Definition\\": "src/php/"
+      "AmaTeam\\ElasticSearch\\Schema\\Definition\\": "src/php/src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "AmaTeam\\ElasticSearch\\Schema\\Definition\\Test\\": "src/php/tests"
     }
   },
   "require": {
     "php": ">= 5.3"
   },
   "require-dev": {
-    "codeception/codeception": "^2.3"
+    "codeception/codeception": "^2.3",
+    "allure-framework/allure-codeception": "^1.2"
+  },
+  "config": {
+    "vendor-dir": "src/php/vendor",
+    "bin-dir": "src/php/bin"
   }
 }
