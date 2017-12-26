@@ -1,0 +1,4 @@
+elasticsearch:
+  versions:
+    6.1.0:
+      $ref: 'elasticsearch/6.1.0.yml#'

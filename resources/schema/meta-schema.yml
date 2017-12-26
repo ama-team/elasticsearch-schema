@@ -1,0 +1,283 @@
+definitions:
+  EntityTrait:
+    type: object
+    properties:
+      title:
+        type: string
+      summary:
+        type: string
+      description:
+        type: string
+      metadata:
+        type: object
+      deprecated:
+        type: boolean
+        default: false
+      removed:
+        type: boolean
+        default: false
+      extends:
+        type: string
+
+  TemplateTrait:
+    type: object
+    required: [template]
+    properties:
+      template:
+        type: boolean
+        enum: [true]
+      children:
+        type: array
+        items:
+          type: string
+
+  ParameterizedTrait:
+    type: object
+    properties:
+      parameters:
+        $ref: '#/definitions/ParameterMap'
+
+  ParametrizedEntity:
+    allOf:
+      - $ref: '#/definitions/EntityTrait'
+      - $ref: '#/definitions/ParameterizedTrait'
+
+  Constraint:
+    type: object
+    required: [type]
+    properties:
+      type:
+        type: string
+
+  ConstraintSpecification:
+    oneOf:
+      - $ref: '#/definitions/Constraint'
+      - type: string
+
+  ConstraintSet:
+    type: array
+    items:
+      $ref: '#/definitions/ConstraintSpecification'
+
+  Parameter:
+    allOf:
+      - $ref: '#/definitions/EntityTrait'
+      - type: object
+        properties:
+          type:
+            oneOf:
+              - type: string
+              - type: array
+                items:
+                  type: string
+          default: {}
+          enum:
+            type: boolean
+            default: false
+          values:
+            type: array
+          constraints:
+            $ref: '#/definitions/ConstraintSet'
+
+  ParameterTemplate:
+    allOf:
+      - $ref: '#/definitions/Parameter'
+      - $ref: '#/definitions/TemplateTrait'
+
+  ParameterSpecification:
+    oneOf:
+      - $ref: '#/definitions/Parameter'
+      - $ref: '#/definitions/ParameterTemplate'
+      - type: 'null'
+
+  ParameterMap:
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/ParameterSpecification'
+
+  Type:
+    allOf:
+      - $ref: '#/definitions/ParametrizedEntity'
+
+  TypeTemplate:
+    allOf:
+      - $ref: '#/definitions/Type'
+      - $ref: '#/definitions/TemplateTrait'
+
+  TypeSpecification:
+    oneOf:
+      - $ref: '#/definitions/Type'
+      - $ref: '#/definitions/TypeTemplate'
+      - type: 'null'
+
+  TypeMap:
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/TypeSpecification'
+
+  Analyzer:
+    allOf:
+      - $ref: '#/definitions/ParametrizedEntity'
+
+  AnalyzerSpecification:
+    oneOf:
+      - $ref: '#/definitions/Analyzer'
+      - type: 'null'
+
+  AnalyzerMap:
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/AnalyzerSpecification'
+
+  Tokenizer:
+    allOf:
+      - $ref: '#/definitions/ParametrizedEntity'
+
+  TokenizerSpecification:
+    oneOf:
+      - $ref: '#/definitions/Tokenizer'
+      - type: 'null'
+
+  TokenizerMap:
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/TokenizerSpecification'
+
+  TokenFilter:
+    allOf:
+      - $ref: '#/definitions/ParametrizedEntity'
+
+  TokenFilterSpecification:
+    oneOf:
+      - $ref: '#/definitions/TokenFilter'
+      - type: 'null'
+
+  TokenFilterMap:
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/TokenFilterSpecification'
+
+  CharFilter:
+    allOf:
+      - $ref: '#/definitions/ParametrizedEntity'
+
+  CharFilterSpecification:
+    oneOf:
+      - $ref: '#/definitions/CharFilter'
+      - type: 'null'
+
+  CharFilterMap:
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/CharFilterSpecification'
+
+  IndexSetting:
+    allOf:
+      - $ref: '#/definitions/Parameter'
+      - type: object
+        properties:
+          static:
+            type: boolean
+            default: false
+
+  IndexSettingSpecification:
+    oneOf:
+      - $ref: '#/definitions/IndexSetting'
+      - type: 'null'
+
+  IndexSettingMap:
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/IndexSettingSpecification'
+
+  ConfigurationOption:
+    allOf:
+      - $ref: '#/definitions/Parameter'
+
+  ConfigurationOptionSpecification:
+    oneOf:
+      - $ref: '#/definitions/ConfigurationOption'
+      - type: 'null'
+
+  ConfigurationOptionMap:
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/ConfigurationOptionSpecification'
+
+  Analysis:
+    type: object
+    properties:
+      parameters:
+        $ref: '#/definitions/ParameterMap'
+      analyzers:
+        type: object
+        properties:
+          parameters:
+            $ref: '#/definitions/ParameterMap'
+          types:
+            $ref: '#/definitions/AnalyzerMap'
+      tokenizers:
+        type: object
+        properties:
+          parameters:
+            $ref: '#/definitions/ParameterMap'
+          types:
+            $ref: '#/definitions/TokenizerMap'
+      token_filters:
+        type: object
+        properties:
+          parameters:
+            $ref: '#/definitions/ParameterMap'
+          types:
+            $ref: '#/definitions/TokenFilterMap'
+      char_filters:
+        type: object
+        properties:
+          parameters:
+            $ref: '#/definitions/ParameterMap'
+          types:
+            $ref: '#/definitions/CharFilterMap'
+
+  IndexSettings:
+    $ref: '#/definitions/IndexSettingMap'
+
+  Mapping:
+    type: object
+    properties:
+      parameters:
+        $ref: '#/definitions/ParameterMap'
+      types:
+        $ref: '#/definitions/TypeMap'
+
+  Index:
+    type: object
+    properties:
+      analysis:
+        $ref: '#/definitions/Analysis'
+      settings:
+        $ref: '#/definitions/IndexSettings'
+
+  Configuration:
+    $ref: '#/definitions/ConfigurationOptionMap'
+
+  Version:
+    type: object
+    properties:
+      mapping:
+        $ref: '#/definitions/Mapping'
+      index:
+        $ref: '#/definitions/Index'
+      configuration:
+        $ref: '#/definitions/Configuration'
+
+  Product:
+    type: object
+    properties:
+      versions:
+        type: object
+        additionalProperties:
+          $ref: '#/definitions/Version'
+
+type: object
+additionalProperties:
+  $ref: '#/definitions/Product'

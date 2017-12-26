@@ -1,2 +1,10 @@
 # IDE files
 .idea
+
+# Package managers
+Gemfile.lock
+
+# Jekyll
+_site
+.sass-cache
+.jekyll-metadata

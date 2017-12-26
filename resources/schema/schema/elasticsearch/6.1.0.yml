@@ -1,0 +1,957 @@
+parameters:
+  escaped_tags:
+    type: string
+    enum: true
+  mappings:
+    type: string
+    enum: true
+    constraints:
+      - type: glob
+        pattern: '*=>*'
+  mappings_path:
+    type: string
+  position_increment_gap:
+    default: 100
+    constraints:
+      - type: integer
+        minimum: 0
+  stopwords:
+    type: string
+    enum: true
+  stopwords_path:
+    type: string
+  lowercase:
+    type: boolean
+  max_output_size:
+    type: integer
+    default: 255
+    constraints:
+      - type: integer
+        minimum: 1
+  max_token_length:
+    type: integer
+    constraints:
+      - type: integer
+        minimum: 1
+  min_gram:
+    type: integer
+    constraints:
+      - type: integer
+        minimum: 1
+  max_gram:
+    type: integer
+    constraints:
+      - type: integer
+        minimum: 1
+  separator:
+    type: string
+    default: ' '
+  tokenizer:
+    type: string
+    enum: true
+  char_filter:
+    type: string
+    enum: true
+  filter:
+    type: string
+    enum: true
+  token_chars:
+    type: string
+    enum: true
+    default: []
+    values:
+      - letter
+      - digit
+      - whitespace
+      - punctuation
+      - symbol
+  buffer_size:
+    default: 256
+    type: integer
+    constraints:
+      - type: integer
+        minimum: 1
+  pattern:
+    type: string
+    default: '\W+'
+  flags:
+    type: string
+  group:
+    type: integer
+    default: -1
+    constraints:
+      - type: integer
+        minimum: -1
+  delimiter:
+    type: string
+    default: /
+  replacement:
+    type: string
+  reverse:
+    type: boolean
+  skip:
+    type: integer
+    default: 0
+    constraints:
+      - type: integer
+        minimum: 0
+  analyzer:
+    type: string
+  normalizer:
+    type: string
+  boost:
+    type: number
+    default: 1.0
+    deprecated: true
+  coerce:
+    type: boolean
+    default: true
+  copy_to:
+    type: string
+  doc_values:
+    type: boolean
+    default: true
+  dynamic:
+    type: [string, boolean]
+    default: true
+    values:
+      - true
+      - false
+      - strict
+      - 'true'
+      - 'false'
+  enabled:
+    type: boolean
+    default: true
+  enable_position_increments:
+    type: boolean
+    default: true
+  eager_global_ordinals:
+    type: boolean
+    default: true
+  fielddata:
+    type: boolean
+    default: false
+  fielddata_frequency_filter:
+    type: object
+    constraints:
+      - type: nested
+        properties:
+          min:
+            - type: number
+          max:
+            - type: number
+          min_segment_size:
+            - type: number
+  format:
+    type: string
+  ignore_above:
+    type: integer
+    constraints:
+      - type: integer
+        minimum: 1
+  ignore_malformed:
+    type: boolean
+    default: false
+  index:
+    type: boolean
+    default: true
+  index_options:
+    type: string
+    default: docs
+    values:
+      - docs
+      - freqs
+      - positions
+      - offsets
+  locale:
+    type: string
+    default: ROOT
+  fields:
+    type: object
+    constraints:
+      - type: values
+        constraints:
+          - type: mappingType
+  norms:
+    type: boolean
+  null_value:
+    default: null
+    nullable: true
+  properties:
+    type: object
+    constraints:
+      - type: values
+        constraints:
+          - type: mappingType
+  search_analyzer:
+    type: string
+  search_quote_analyzer:
+    type: string
+  similarity:
+    type: string
+    default: BM25
+    values:
+      - BM25
+      - classic
+      - boolean
+  store:
+    type: boolean
+    default: false
+  term_vector:
+    type: string
+    default: 'no'
+    values:
+      - 'no'
+      - 'yes'
+      - with_positions
+      - with_offsets
+      - with_position_offsets
+  tree:
+    type: string
+    default: geohash
+    values:
+      - geohash
+      - quadtree
+  precision:
+    type: string
+    default: meters
+    values:
+      - in
+      - inch
+      - yd
+      - yard
+      - mi
+      - miles
+      - km
+      - kilometers
+      - m
+      - meters
+      - cm
+      - centimeters
+      - mm
+      - millimeters
+  tree_levels:
+    type: [integer, string]
+    default: 50m
+  strategy:
+    type: string
+    default: recursive
+    values:
+      - recursive
+      - term
+  distance_error_pct:
+    type: number
+    default: 0.025
+  orientation:
+    type: string
+    default: ccw
+    values:
+      - right
+      - ccw
+      - counterclockwise
+      - left
+      - cw
+      - clockwise
+  points_only:
+    type: boolean
+    default: false
+  relations:
+    type: object
+    constraints:
+      - type: size
+        minimum: 1
+        maximum: 1
+      - type: values
+        constraints:
+          - type: notNull
+          - type: string
+  preserve_original:
+    type: boolean
+    default: false
+  min:
+    type: integer
+    default: 0
+  max:
+    type: integer
+    default: 2147483647
+  language:
+    type: string
+  side:
+    type: string
+    deprecated: true
+    values:
+      - front
+      - back
+  min_shingle_size:
+    type: integer
+    default: 2
+  max_shingle_size:
+    type: integer
+    default: 2
+  output_unigrams:
+    type: boolean
+    default: true
+  output_unigrams_if_no_shingles:
+    type: boolean
+    defaults: false
+  token_separator:
+    type: string
+    default: ' '
+  filler_token:
+    type: string
+    default: '_'
+  ignore_case:
+    type: boolean
+    default: false
+  remove_trailing:
+    type: boolean
+    default: true
+  generate_word_parts:
+    type: boolean
+    default: true
+  generate_number_parts:
+    type: boolean
+    default: true
+  catenate_words:
+    type: boolean
+    default: false
+  catenate_numbers:
+    type: boolean
+    default: false
+  catenate_all:
+    type: boolean
+    default: false
+  split_on_case_change:
+    type: boolean
+    default: true
+  split_on_numerics:
+    type: boolean
+    default: true
+  stem_english_possessive:
+    type: boolean
+    default: true
+  protected_words:
+    type: string
+    enum: true
+  protected_words_path:
+    type: string
+  type_table:
+    type: string
+  type_table_path:
+    type: string
+  rules:
+    type: string
+  rules_path:
+    type: string
+  keywords:
+    type: string
+    enum: true
+  keywords_path:
+    type: string
+  keywords_pattern:
+    type: string
+  synonyms:
+    type: string
+    enum: true
+    constraints:
+      - type: glob
+        pattern: '*=>*'
+  synonyms_path:
+    type: string
+  word_list:
+    type: string
+    enum: true
+  word_list_path:
+    type: string
+  hyphenation_patterns_path:
+    type: string
+  min_word_size:
+    type: integer
+    default: 5
+  min_subword_size:
+    type: integer
+    default: 2
+  max_subword_size:
+    type: integer
+    default: 15
+  only_longest_match:
+    type: boolean
+    default: false
+  articles:
+    type: string
+    enum: true
+  length:
+    type: integer
+    default: 10
+  only_on_same_position:
+    type: boolean
+    default: false
+  patterns:
+    type: string
+    enum: true
+  max_token_count:
+    type: integer
+    default: 1
+    constraints:
+      - type: integer
+        minimum: 0
+  consume_all_tokens:
+    type: boolean
+    default: false
+  dictionary:
+    type: string
+  dedup:
+    type: boolean
+    default: true
+  longest_only:
+    type: boolean
+    default: false
+  common_words:
+    type: string
+    enum: true
+  common_words_path:
+    type: string
+  query_mode:
+    type: boolean
+    default: false
+  ignored_scripts:
+    type: string
+    enum: true
+    values:
+      - han
+      - higarana
+      - katakana
+      - hangul
+  encoding:
+    type: string
+    values:
+      - int
+      - float
+      - identity
+  keep_words:
+    type: string
+    enum: true
+  keep_words_path:
+    type: string
+  keep_words_case:
+    type: boolean
+    default: false
+  types:
+    type: string
+    enum: true
+    # TODO: list possible values
+  hash_count:
+    type: integer
+    default: 1
+  bucket_count:
+    type: integer
+    default: 512
+  hash_set_size:
+    type: integer
+    default: 1
+  with_rotation:
+    type: boolean
+mapping:
+  types:
+    root:
+      parameters:
+        dynamic: ~
+        enabled: ~
+        properties: ~
+    binary:
+      parameters:
+        doc_values: ~
+        store: ~
+    _range_family_:
+      parameters:
+        coerce: ~
+        boost: ~
+        index: ~
+        store: ~
+      children:
+        integer_range: ~
+        long_range: ~
+        float_range: ~
+        double_range: ~
+        date_range: ~
+        ip_range: ~
+    boolean:
+      parameters:
+        boost: ~
+        doc_values: ~
+        index: ~
+        null_value: ~
+        store: ~
+    date:
+      parameters:
+        boost: ~
+        doc_values: ~
+        format: ~
+        locale: ~
+        ignore_malformed: ~
+        index: ~
+        null_value: ~
+        store: ~
+    geo_point:
+      parameters:
+        ignore_malformed: ~
+    geo_shape:
+      parameters:
+        tree: ~
+        precision: ~
+        tree_levels: ~
+        strategy: ~
+        distance_error_pct: ~
+        orientation: ~
+        points_only: ~
+        ignore_malformed: ~
+    ip:
+      parameters:
+        boost: ~
+        doc_values: ~
+        index: ~
+        null_value: ~
+        store: ~
+    keyword:
+      parameters:
+        boost: ~
+        doc_values: ~
+        eager_global_ordinals: ~
+        fields: ~
+        ignore_above: ~
+        index: ~
+        index_options: ~
+        norms: ~
+        null_value: ~
+        store: ~
+        similarity: ~
+        normalizer: ~
+    nested:
+      parameters:
+        dynamic: ~
+        properties: ~
+    _numeric_family_:
+      template: true
+      parameters:
+        coerce: ~
+        boost: ~
+        doc_values: ~
+        ignore_malformed: ~
+        index: ~
+        null_value: ~
+        store: ~
+      children:
+        long: ~
+        integer: ~
+        short: ~
+        byte: ~
+        double: ~
+        float: ~
+        half_float: ~
+    scaled_float:
+      extends: _numeric_family_
+      parameters:
+        coerce: ~
+        boost: ~
+        doc_values: ~
+        ignore_malformed: ~
+        index: ~
+        null_value: ~
+        store: ~
+        scaling_factor: ~
+    object:
+      parameters:
+        dynamic: ~
+        enabled: ~
+        properties: ~
+    text:
+      parameters:
+        analyzer: ~
+        boost: ~
+        eager_global_ordinals: ~
+        fielddata: ~
+        fielddata_frequency_filter: ~
+        fields: ~
+        index: ~
+        index_options: ~
+        norms: ~
+        position_increment_gap: ~
+        store: ~
+        search_analyzer: ~
+        search_quote_analyzer: ~
+        similarity: ~
+        term_vector: ~
+    token_count:
+      parameters:
+        analyzer: ~
+        enable_position_increments: ~
+        boost: ~
+        doc_values: ~
+        index: ~
+        null_value: ~
+        store: ~
+    percolator: ~
+    join:
+      parameters:
+        relations: ~
+index:
+  analysis:
+    analyzers:
+      types:
+        standard:
+          parameters:
+            max_token_length: ~
+            stopwords: ~
+            stopwords_path: ~
+        simple: ~
+        whitespace: ~
+        stop:
+          parameters:
+            stopwords: ~
+            stopwords_path: ~
+        keyword: ~
+        pattern:
+          parameters:
+            pattern: ~
+            flags: ~
+            lowercase: ~
+            stopwords: ~
+        fingerprint:
+          parameters:
+            separator: ~
+            max_output_size: ~
+            stopwords: ~
+            stopwords_path: ~
+        _language_:
+          template: true
+          parameters:
+            stopwords: ~
+            stopwords_path: ~
+            stem_exclusion: ~
+          children:
+            arabic: ~
+            armenian: ~
+            basque: ~
+            brazilian: ~
+            bulgarian: ~
+            catalan: ~
+            cjk: ~
+            czech: ~
+            danish: ~
+            dutch: ~
+            english: ~
+            finnish: ~
+            french: ~
+            galician: ~
+            german: ~
+            greek: ~
+            hindi: ~
+            hungarian: ~
+            indonesian: ~
+            irish: ~
+            italian: ~
+            latvian: ~
+            lithuanian: ~
+            norwegian: ~
+            persian: ~
+            portuguese: ~
+            romanian: ~
+            russian: ~
+            sorani: ~
+            spanish: ~
+            swedish: ~
+            turkish: ~
+            thai: ~
+    tokenizers:
+      types:
+        standard:
+          parameters:
+            max_token_length: ~
+        letter: ~
+        lowercase: ~
+        whitespace:
+          parameters:
+            max_token_length: ~
+        uax_url_email:
+          parameters:
+            max_token_length: ~
+        classic:
+          parameters:
+            max_token_length: ~
+        thai: ~
+        _ngram_family:
+          template: true
+          parameters:
+            min_gram: ~
+            max_gram: ~
+            token_chars: ~
+          children: [ngram, edge_ngram]
+        keyword:
+          parameters:
+            buffer_size: ~
+        pattern:
+          parameters:
+            pattern: ~
+            flags: ~
+            group: ~
+        simple_pattern:
+          parameters:
+            pattern: ~
+        simple_pattern_split:
+          parameters:
+            pattern: ~
+        path_hierarchy:
+          parameters:
+            delimiter: ~
+            replacement: ~
+            buffer_size: ~
+            reverse: ~
+            skip: ~
+    token_filters:
+      standard: ~
+      asciifolding:
+        parameters:
+          preserve_original: ~
+      flatten_graph: ~
+      length:
+        parameters:
+          min: ~
+          max: ~
+      lowercase:
+        parameters:
+          language: ~
+      uppercase:
+      ngram:
+        parameters:
+          min_gram: ~
+          max_gram: ~
+      edge_ngram:
+        parameters:
+          min_gram: ~
+          max_gram: ~
+          side: ~
+      porter_stem: ~
+      shingle:
+        parameters:
+          max_shingle_size: ~
+          min_shingle_size: ~
+          output_unigrams: ~
+          output_unigrams_if_no_shingles: ~
+          token_separator: ~
+          filler_token: ~
+      stop:
+        parameters:
+          stopwords: ~
+          stopwords_path: ~
+          ignore_case: ~
+      _word_delimiter_family_:
+        template: true
+        parameters:
+          generate_word_parts: ~
+          generate_number_parts: ~
+          catenate_words: ~
+          catenate_numbers: ~
+          catenate_all: ~
+          split_on_case_change: ~
+          preserve_original: ~
+          split_on_numerics: ~
+          stem_english_possessive: ~
+          protected_words: ~
+          protected_words_path: ~
+          type_table: ~
+          type_table_path: ~
+        children:
+          word_delimiter: ~
+          word_delimiter_graph: ~
+      stemmer:
+        parameters:
+          # TODO: actually, there's also a `name` parameter
+          language: ~
+      stemmer_override:
+        parameters:
+          rules: ~
+          rules_path: ~
+      keyword_marker:
+        parameters:
+          keywords: ~
+          keywords_path: ~
+          keywords_pattern: ~
+          ignore_case: ~
+      keyword_repeat: ~
+      kstem: ~
+      snowball:
+        parameters:
+          language: ~
+      _synonym_family_:
+        template: true
+        children:
+          synonym: ~
+          synonym_graph: ~
+        parameters:
+          format: ~
+          synonyms: ~
+          synonyms_path: ~
+      hyphenation_decompounder:
+        parameters:
+          word_list: ~
+          word_list_path: ~
+      dictionary_decompounder:
+        parameters:
+          word_list: ~
+          word_list_path: ~
+          hyphenation_patterns_path: ~
+          min_word_size: ~
+          min_subword_size: ~
+          max_subword_size: ~
+          only_longest_match: ~
+      reverse: ~
+      elision:
+        parameters:
+          articles: ~
+      truncate:
+        parameters:
+          length: ~
+      unique:
+        parameters:
+          only_on_same_position: ~
+      pattern_capture:
+        parameters:
+          patterns: ~
+          preserve_original: ~
+      pattern_replacement:
+        parameters:
+          pattern: ~
+          replacement: ~
+      trim: ~
+      limit_token_count:
+        parameters:
+          max_token_count: ~
+          consume_all_tokens: ~
+      hunspell:
+        parameters:
+          locale: ~
+          dictionary: ~
+          dedup: ~
+          longest_only: ~
+      common_grams:
+        parameters:
+          common_words: ~
+          common_words_path: ~
+          ignore_case: ~
+          query_mode: ~
+      _normalization_family_:
+        template: true
+        children:
+          arabic_normalization: ~
+          german_normalization: ~
+          hindi_normalization: ~
+          indic_normalization: ~
+          sorani_normalization: ~
+          persian_normalization: ~
+          scandinavian_normalization: ~
+          scandinavian_folding: ~
+          servian_normalization: ~
+      cjk_width: ~
+      cjk_bigram:
+        parameters:
+          output_unigrams: ~
+          ignored_scripts: ~
+      delimited_payload:
+        parameter_overrides:
+          delimiter:
+            default: '|'
+        parameters:
+          delimiter: ~
+          encoding: ~
+      keep_words:
+        parameters:
+          keep_words: ~
+          keep_words_path: ~
+          keep_words_case: ~
+      keep_types:
+        parameters:
+          types: ~
+      classic: ~
+      apostrophe: ~
+      decimal_digit: ~
+      fingerprint:
+        parameters:
+          separator: ~
+          max_output_size: ~
+      min_hash:
+        parameters:
+          hash_count: ~
+          bucket_count: ~
+          hash_set_size: ~
+          with_rotation: ~
+    char_filters:
+      html_strip:
+        parameters:
+          escaped_tags: ~
+      mapping:
+        parameters:
+          mappings: ~
+          mappings_path: ~
+      pattern_replace:
+        parameters:
+          pattern: ~
+          replacement: ~
+          flags: ~
+  settings:
+    priority:
+      type: integer
+    max_ngram_diff:
+      type: integer
+      constraints:
+        - type: integer
+          minimum: 0
+    max_shingle_diff:
+      type: integer
+      constraints:
+        - type: integer
+          minimum: 0
+    routing.allocation.include.*:
+      type: string
+    routing.allocation.exclude.*:
+      type: string
+    routing.allocation.require.*:
+      type: string
+    unassigned.node_left.delayed_timeout:
+      type: string
+    routing.allocation.total_shards_per_node:
+      type: integer
+    merge.scheduler.max_thread_count:
+      type: integer
+    number_of_replicas:
+      type: integer
+    number_of_shards:
+      dynamic: false
+      type: integer
+    shard.check_on_startup:
+      dynamic: false
+      values:
+        - true
+        - false
+        - checksum
+        - fix
+    codec:
+      dynamic: false
+      type: string
+      values:
+        - default
+        - best_compression
+configuration:
+  indices.analysis.hunspell.dictionary.ignore_case:
+    type: boolean
+    default: false
+  indices.analysis.hunspell.dictionary.*.ignore_case:
+    type: boolean
+    default: false
+  indices.analysis.hunspell.dictionary.location:
+    type: string
+  indices.analysis.hunspell.dictionary.lazy:
+    type: boolean
+    default: false
+
+
