@@ -15,22 +15,6 @@ and other entities are available in particular version of software.
 - **Tool** would be used further as an abstract thing implementing the
 algorithm.
 
-At some point of time end user provides tool with sources and requests 
-tool for a schema for particular set of software versions. The tool 
-then does the following:
-
-- Loads all sources as plain objects, resolving any JSON pointers
-contained in schemas. 
-- Checks every source against validation schema
-- Merges all overlapping versions in sources: if source A contains 
-ElasticSearch/6.0.0 and source B also contains ElasticSearch/6.0.0,
-definitions for those versions are merged into one object. Reaction
-to overlapping entities (e.g. if both versions contain different 
-definitions for same mapping type) is up to implementation: it may be
-silent overwrite, logged warnings or raised error.
-- On next stage tool resolves particular versions of software: fills
-- After that 
-
 ## Resolution phase
 
 On the first step user provides algorithm with one or more data 
