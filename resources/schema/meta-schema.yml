@@ -265,6 +265,10 @@ definitions:
   Version:
     type: object
     properties:
+      requires:
+        type: object
+        additionalProperties:
+          type: string
       parameters:
         $ref: '#/definitions/ParameterMap'
       mapping:
@@ -277,6 +281,10 @@ definitions:
   Product:
     type: object
     properties:
+      requires:
+        type: object
+        additionalProperties:
+          type: null
       versions:
         type: object
         additionalProperties:
