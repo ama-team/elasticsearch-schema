@@ -252,6 +252,8 @@ definitions:
   Index:
     type: object
     properties:
+      parameters:
+        $ref: '#/definitions/ParameterMap'
       analysis:
         $ref: '#/definitions/Analysis'
       settings:
@@ -263,6 +265,8 @@ definitions:
   Version:
     type: object
     properties:
+      parameters:
+        $ref: '#/definitions/ParameterMap'
       mapping:
         $ref: '#/definitions/Mapping'
       index:
