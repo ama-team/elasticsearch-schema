@@ -15,6 +15,7 @@
 # in the templates via {{ site.myvariable }}.
 title: ElasticSearch Schema
 email: dev@amagroup.ru
+baseurl: '/elasticsearch-schema'
 github_username:  ama-team
 defaults:
   - scope:
