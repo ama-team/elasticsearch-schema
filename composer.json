@@ -1,5 +1,5 @@
 {
-  "name": "ama-team/elasticsearch-schema-definitions",
+  "name": "ama-team/elasticsearch-schema-definition",
   "description": "Declarative definition of ElasticSearch configuration",
   "license": "MIT",
   "authors": [

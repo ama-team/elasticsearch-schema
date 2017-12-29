@@ -2,31 +2,54 @@
 
 namespace AmaTeam\ElasticSearch\Schema\Definition;
 
-class Locator
+final class Locator
 {
+    const RESOURCE_ROOT = 'resources';
+    const SCHEMA_ROOT = 'schema';
+    const SCHEMA_FILE = 'schema.yml';
+    const VALIDATION_SCHEMA_FILE = 'validation-schema.yml';
+
     /**
-     * Returns path to schema for specified product (or null if no
-     * such product is registered).
-     *
-     * @param string $product
-     *
-     * @return string|null
+     * @return string
      */
-    public static function locateSchema($product)
+    public static function getProjectRoot()
     {
-        $segments = [ProjectStructure::getProductSchemaRoot(), $product . '.yml'];
-        $path = implode(DIRECTORY_SEPARATOR, $segments);
-        return file_exists($path) ? $path : null;
+        $cursor = __DIR__;
+        for ($i = 0; $i < 3; $i++) {
+            $cursor = dirname($cursor);
+        }
+        return $cursor;
     }
 
     /**
-     * Returns path to validation schema
-     *
      * @return string
      */
-    public static function locateMetaSchema()
+    public static function getResourcesRoot()
     {
-        $segments = [ProjectStructure::getSchemaRoot(), 'meta-schema.yml'];
-        return implode(DIRECTORY_SEPARATOR, $segments);
+        return self::getProjectRoot() . DIRECTORY_SEPARATOR . self::RESOURCE_ROOT;
+    }
+
+    /**
+     * @return string
+     */
+    public static function getSchemaRoot()
+    {
+        return self::getResourcesRoot() . DIRECTORY_SEPARATOR . self::SCHEMA_ROOT;
+    }
+
+    /**
+     * @return string
+     */
+    public static function getSchemaLocation()
+    {
+        return self::getSchemaRoot() . DIRECTORY_SEPARATOR . self::SCHEMA_FILE;
+    }
+
+    /**
+     * @return string
+     */
+    public static function getValidationSchemaLocation()
+    {
+        return self::getSchemaRoot() . DIRECTORY_SEPARATOR . self::VALIDATION_SCHEMA_FILE;
     }
 }

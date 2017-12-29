@@ -1,0 +1,2 @@
+elasticsearch:
+  $ref: 'schema/elasticsearch.yml'
