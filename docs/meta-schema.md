@@ -49,8 +49,21 @@ All `*Name` types are just strings, and `ProductName` stands for
 ES-related software - `elasticsearch` itself or just some plugin.
 Version is represented as string as well (e.g. `6.0.0`).
 
-This schema ***may*** exapnd in future to include queries, aggregations
+This schema ***may*** expand in future to include queries, aggregations
 and other ElasticSearch entities.
+
+## References
+
+Every item in the schema may be referenced from other file using 
+standard JSON pointer:
+
+```yaml
+elasticsearch:
+  6.0.0:
+    $ref: 'elasticsearch/6.0.0.yml#'
+```
+
+It's up to schema build tool to resolve such references at load time.
 
 ## Common functionality
 

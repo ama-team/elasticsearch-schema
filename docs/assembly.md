@@ -8,7 +8,7 @@ On the first step user provides algorithm with one or more data
 sources. Those sources may contain different versions for different
 products, and on this stage algorithm resolves those sources into 
 in-memory structures - usually this will mean just reading files and
-resolving `$ref` references. The result of this phase is jsut a 
+resolving `$ref` references. The result of this phase is just a 
 collection of structures (one for every source) that may contain 
 invalid data.
 
@@ -29,7 +29,7 @@ required parameters have to be contained within entities themselves.
 
 ## Merge phase
 
-During this phase proccessor builds schema for target products and 
+During this phase processor builds schema for target products and 
 version. For each product it calculates target state, after which it
 is merged with products current one inherits. After all products 
 schemas have been finished, they are merged together. Schema builder
